@@ -1,0 +1,41 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.MainPage"
+             Title="Менеджер ресурсов">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Label Text="Системные процессы" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding Processes}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding PID}" HorizontalOptions="End" />
+                            <Label Text="{Binding MemoryUsage}" HorizontalOptions="End" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Файловая система" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding FileSystemItems}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding Size}" HorizontalOptions="End" />
+                            <Label Text="{Binding LastModified}" HorizontalOptions="End" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Обновить процессы" Command="{Binding RefreshProcessesCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
